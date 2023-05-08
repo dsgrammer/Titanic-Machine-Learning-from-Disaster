@@ -44,9 +44,16 @@ table(train$Age, useNA = 'always')
 summary(train$Age)
 # Two passengers did not board the titanic, dropped
 table(test$Embarked, useNA = 'always')
-# test <- test %>%
-#   add_column(empty_column = NA)
+test <- add_column(.data = test, .before = 'Pclass')
 #----------------------------------------------------------------------------------
+# #Logistic regression
+# classifier = glm(formula = Survived ~ .,
+#                  family = binomial,
+#                  data = train)
+# 
+# prob_pred = predict(classifier, type = 'response', newdata = test[-1])
+# y_pred = ifelse(prob_pred > 0.5, 1, 0)
+
 # Fitting XGBoost to the Training set
 library(xgboost)
 data <- as.matrix(train[-2])
